@@ -44,6 +44,9 @@ createIngredient = """
         PRIMARY KEY (Name)
     )
     """
+insertIngredient = """
+    INSERT INTO Ingredient(Name, Volume, Calories, Fat, Price, Extra_price) VALUES(%s, %s, %s, %s, %s, %s)
+    """
 createOrder = """
     CREATE TABLE User_order (
         Order_ID INT, Customer_ID INT, Employee_ID INT,
