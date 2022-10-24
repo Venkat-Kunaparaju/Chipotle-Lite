@@ -45,7 +45,20 @@ if 'Chipotle_Lite' not in check:
         cursor.execute("SELECT * FROM Inventory")
         for x in cursor:
             print(x)
-    
-          
+        print("\n")
+        
+    #Load employee data
+    csvFile = "Data/Employees.csv"
+    with open(csvFile, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            cursor.execute(commands.insertEmployee, [int(row[0]), row[1], int(row[2]), row[3]])
 
+            
+        #Test employee data
+        cursor.execute("SELECT * FROM Employees")
+        for x in cursor:
+            print(x)
+        print("\n")
+    
 

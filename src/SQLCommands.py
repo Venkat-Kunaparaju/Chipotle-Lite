@@ -24,6 +24,9 @@ createCustomer = """
         PRIMARY KEY (Customer_ID)
     ) 
     """
+insertCustomer = """
+    INSERT INTO Customer(Customer_ID, Name, Place_in_line, Order_ID) VALUES(%s, %s, %s, %s)
+    """
 createProtein = """
     CREATE TABLE Protein (
         Name VARCHAR(255), Volume INT, Calories INT,
