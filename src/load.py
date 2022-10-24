@@ -40,10 +40,12 @@ if 'Chipotle_Lite' not in check:
         for row in reader:
             cursor.execute(commands.insertInventory, [row[0], int(row[1])])
 
-            #Test inventory data
-            cursor.execute("SELECT * FROM Inventory")
-
-            for x in cursor:
-                print(x)
+            
+        #Test inventory data
+        cursor.execute("SELECT * FROM Inventory")
+        for x in cursor:
+            print(x)
+    
+          
 
 

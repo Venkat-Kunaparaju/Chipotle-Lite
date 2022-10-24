@@ -14,6 +14,9 @@ createEmployees = """
         PRIMARY KEY (Employee_ID)
     )
     """
+insertEmployee = """
+    INSERT INTO Employees(Employee_ID, Name, Salary, Job) VALUES(%s, %s, %s, %s)
+    """
 createCustomer = """
     CREATE TABLE Customer (
         Customer_ID INT, Name VARCHAR(255),
