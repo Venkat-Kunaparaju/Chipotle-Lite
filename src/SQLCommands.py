@@ -4,6 +4,9 @@ createInventory = """
         PRIMARY KEY (Name)
     )
     """
+insertInventory = """
+    INSERT INTO INVENTORY(Name, Count) VALUES(%s, %s)
+    """
 createEmployees = """
     CREATE TABLE Employees (
         Employee_ID INT, Name VARCHAR(255), Salary INT,

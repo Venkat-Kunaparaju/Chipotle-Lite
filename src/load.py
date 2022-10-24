@@ -1,5 +1,6 @@
 import mysql.connector
 import SQLCommands as commands
+import csv
 
 mydb = mysql.connector.connect( # establish connection
     host="localhost",
@@ -31,3 +32,18 @@ if 'Chipotle_Lite' not in check:
     cursor.execute(commands.createMenu)
     cursor.execute(commands.createProteinList)
     cursor.execute(commands.createIngredientList);
+
+    #Load inventory data
+    csvFile = "Data/Inventory.csv"
+    with open(csvFile, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            cursor.execute(commands.insertInventory, [row[0], int(row[1])])
+
+            #Test inventory data
+            cursor.execute("SELECT * FROM Inventory")
+
+            for x in cursor:
+                print(x)
+
+
