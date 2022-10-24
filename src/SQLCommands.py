@@ -54,14 +54,23 @@ createOrder = """
         PRIMARY KEY (Order_ID)
     )
     """
+insertOrder = """
+    INSERT INTO Order(Order_ID, Customer_ID, Employee_ID, Name, Protein_list_ID, Ingredient_list_ID) VALUES(%s, %s, %s, %s, %s, %s)
+    """
 createProteinList = """
     CREATE TABLE Protein_list (
         Protein_list_ID INT, Name VARCHAR(255)
     )
     """
+insertProteinList = """
+    INSERT INTO Protein_list(Protein_list_ID, Name) VALUES(%s, %s)
+    """
 createIngredientList = """
     CREATE TABLE Ingredient_list (
         Ingredient_list_ID INT, Name VARCHAR(255)
     )
+    """
+insertIngredientList = """
+    INSERT INTO Ingredient_list(Ingredient_list_ID, Name) VALUES(%s, %s)
     """
 
