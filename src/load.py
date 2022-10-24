@@ -61,4 +61,17 @@ if 'Chipotle_Lite' not in check:
             print(x)
         print("\n")
     
+    #Load customer data
+    csvFile = "Data/Customers.csv"
+    with open(csvFile, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            cursor.execute(commands.insertCustomer, [int(row[0]), row[1], int(row[2]), row[3]])
+
+            
+        #Test customer data
+        cursor.execute("SELECT * FROM Customer")
+        for x in cursor:
+            print(x)
+        print("\n")
 
