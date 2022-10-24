@@ -1,3 +1,4 @@
+from tokenize import Double
 import mysql.connector
 import SQLCommands as commands
 import csv
@@ -29,7 +30,6 @@ if 'Chipotle_Lite' not in check:
     cursor.execute(commands.createProtein)
     cursor.execute(commands.createIngredient)
     cursor.execute(commands.createOrder)
-    cursor.execute(commands.createMenu)
     cursor.execute(commands.createProteinList)
     cursor.execute(commands.createIngredientList);
 
@@ -71,6 +71,20 @@ if 'Chipotle_Lite' not in check:
             
         #Test customer data
         cursor.execute("SELECT * FROM Customer")
+        for x in cursor:
+            print(x)
+        print("\n")
+
+    #Load Protein data
+    csvFile = "Data/Protein.csv"
+    with open(csvFile, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            cursor.execute(commands.insertProtein, [row[0], int(row[1]), int(row[2]), int(row[3]), float(row[4]), float(row[5])])
+
+            
+        #Test Protein data
+        cursor.execute("SELECT * FROM Protein")
         for x in cursor:
             print(x)
         print("\n")

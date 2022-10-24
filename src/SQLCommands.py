@@ -30,14 +30,17 @@ insertCustomer = """
 createProtein = """
     CREATE TABLE Protein (
         Name VARCHAR(255), Volume INT, Calories INT,
-        Fat INT, Price INT, Extra_price INT,
+        Fat INT, Price DOUBLE, Extra_price DOUBLE,
         PRIMARY KEY (Name)
-    )
+    )   
+    """
+insertProtein = """
+    INSERT INTO Protein(Name, Volume, Calories, Fat, Price, Extra_price) VALUES(%s, %s, %s, %s, %s, %s)
     """
 createIngredient = """
     CREATE TABLE Ingredient (
         Name VARCHAR(255), Volume INT, Calories INT,
-        Fat INT, Price INT, Extra_price INT,
+        Fat INT, Price DOUBLE, Extra_price DOUBLE,
         PRIMARY KEY (Name)
     )
     """
@@ -46,12 +49,6 @@ createOrder = """
         Order_ID INT, Customer_ID INT, Employee_ID INT,
         Name VARCHAR(255), Protein_list_ID INT, Ingredient_list_ID INT,
         PRIMARY KEY (Order_ID)
-    )
-    """
-createMenu = """
-    CREATE TABLE Menu (
-        Name VARCHAR(255), Protein_list_ID INT, Ingredient_list_ID INT,
-        PRIMARY KEY (NAME)
     )
     """
 createProteinList = """
