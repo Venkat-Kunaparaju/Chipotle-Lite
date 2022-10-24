@@ -89,3 +89,18 @@ if 'Chipotle_Lite' not in check:
             print(x)
         print("\n")
 
+    #Load Ingredient data
+    csvFile = "Data/Ingredient.csv"
+    with open(csvFile, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            cursor.execute(commands.insertIngredient, [row[0], int(row[1]), int(row[2]), int(row[3]), float(row[4]), float(row[5])])
+
+            
+        #Test Ingredient data
+        cursor.execute("SELECT * FROM Ingredient")
+        for x in cursor:
+            print(x)
+        print("\n")
+
+
