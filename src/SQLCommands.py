@@ -50,27 +50,27 @@ insertIngredient = """
 createOrder = """
     CREATE TABLE User_order (
         Order_ID INT, Customer_ID INT, Employee_ID INT,
-        Name VARCHAR(255), Protein_list_ID INT, Ingredient_list_ID INT,
+        Name VARCHAR(255),
         PRIMARY KEY (Order_ID)
     )
     """
 insertOrder = """
-    INSERT INTO Order(Order_ID, Customer_ID, Employee_ID, Name, Protein_list_ID, Ingredient_list_ID) VALUES(%s, %s, %s, %s, %s, %s)
+    INSERT INTO Order(Order_ID, Customer_ID, Employee_ID, Name) VALUES(%s, %s, %s, %s)
     """
 createProteinList = """
     CREATE TABLE Protein_list (
-        Protein_list_ID INT, Name VARCHAR(255)
+        Order_ID INT, Name VARCHAR(255)
     )
     """
 insertProteinList = """
-    INSERT INTO Protein_list(Protein_list_ID, Name) VALUES(%s, %s)
+    INSERT INTO Protein_list(Name) VALUES(%s)
     """
 createIngredientList = """
     CREATE TABLE Ingredient_list (
-        Ingredient_list_ID INT, Name VARCHAR(255)
+        Order_ID INT, Name VARCHAR(255)
     )
     """
 insertIngredientList = """
-    INSERT INTO Ingredient_list(Ingredient_list_ID, Name) VALUES(%s, %s)
+    INSERT INTO Ingredient_list(Name) VALUES(%s)
     """
 

@@ -1,4 +1,3 @@
-from tokenize import Double
 import mysql.connector
 import SQLCommands as commands
 import csv
