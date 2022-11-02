@@ -25,12 +25,13 @@ if 'Chipotle_Lite' not in check:
     cursor.execute("USE Chipotle_Lite")
     cursor.execute(commands.createInventory)
     cursor.execute(commands.createEmployees)
-    cursor.execute(commands.createCustomer)
     cursor.execute(commands.createProtein)
     cursor.execute(commands.createIngredient)
     cursor.execute(commands.createOrder)
+    cursor.execute(commands.createCustomer)
     cursor.execute(commands.createProteinList)
     cursor.execute(commands.createIngredientList);
+    
 
     #Load inventory data
     csvFile = "Data/Inventory.csv"

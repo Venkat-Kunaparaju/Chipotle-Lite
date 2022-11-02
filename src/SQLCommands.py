@@ -21,7 +21,8 @@ createCustomer = """
     CREATE TABLE Customer (
         Customer_ID INT, Name VARCHAR(255),
         Place_in_line INT, Order_ID INT,
-        PRIMARY KEY (Customer_ID)
+        PRIMARY KEY (Customer_ID),
+        FOREIGN KEY (Order_ID) REFERENCES User_order(Order_ID)
     ) 
     """
 insertCustomer = """
@@ -51,15 +52,17 @@ createOrder = """
     CREATE TABLE User_order (
         Order_ID INT, Customer_ID INT, Employee_ID INT,
         Name VARCHAR(255),
-        PRIMARY KEY (Order_ID)
+        PRIMARY KEY (Order_ID),
+        FOREIGN KEY (Employee_ID) REFERENCES Employees(Employee_ID)
     )
     """
 insertOrder = """
     INSERT INTO Order(Order_ID, Customer_ID, Employee_ID, Name) VALUES(%s, %s, %s, %s)
+
     """
 createProteinList = """
     CREATE TABLE Protein_list (
-        Order_ID INT, Name VARCHAR(255)
+        Order_ID INT, Name VARCHAR(255),
     )
     """
 insertProteinList = """
@@ -67,7 +70,7 @@ insertProteinList = """
     """
 createIngredientList = """
     CREATE TABLE Ingredient_list (
-        Order_ID INT, Name VARCHAR(255)
+        Order_ID INT, Name VARCHAR(255),
     )
     """
 insertIngredientList = """
