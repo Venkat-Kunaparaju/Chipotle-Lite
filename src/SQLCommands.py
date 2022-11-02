@@ -62,7 +62,7 @@ insertOrder = """
     """
 createProteinList = """
     CREATE TABLE Protein_list (
-        Order_ID INT, Name VARCHAR(255),
+        Order_ID INT, Name VARCHAR(255)
     )
     """
 insertProteinList = """
@@ -70,7 +70,7 @@ insertProteinList = """
     """
 createIngredientList = """
     CREATE TABLE Ingredient_list (
-        Order_ID INT, Name VARCHAR(255),
+        Order_ID INT, Name VARCHAR(255)
     )
     """
 insertIngredientList = """
