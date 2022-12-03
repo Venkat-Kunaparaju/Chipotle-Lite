@@ -19,9 +19,6 @@ def update():
         
 
 
-
-
-
 def C_Inven():
     inven = Tk()
     inven.geometry("400x300")
