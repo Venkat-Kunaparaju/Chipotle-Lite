@@ -62,6 +62,24 @@ def Employee_Login():
 
     Button(root, text="Login", command=E_Main, height=3, width=13).place(x=140, y=150)
 
+def Customer_Login():
+    # variable for name
+    global cname
+
+    # create login page
+    root = Tk()
+    root.geometry("400x300")
+    root.title("Customer Login Page")
+
+    Label(root, text="Username").place(x=10, y=50)
+
+    cname = Entry(root)
+    cname.place(x=140, y=50)
+
+    Button(root, text="Enter", command=C_Main, height=3, width=13).place(x=140, y=150)
+
+def C_Main():
+    #####
 
 def E_Main():
     name = e1.get()
