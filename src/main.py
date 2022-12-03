@@ -6,6 +6,7 @@ import tkinter.ttk as ttk
 
 welcome = Tk()
 
+
 def update():
     sql1 =  "select name from inventory where name = %s"
     cursor.execute(sql1, [x1.get()])
@@ -17,6 +18,13 @@ def update():
         result = cursor.fetchall()
         print(result)
         
+
+
+def createOrder():
+    #z1 is list of all the ingredients and proteins that the user selected
+    #z2 is the type of order (bowl, tacos, etc.)
+    return
+
 
 
 def C_Inven():
@@ -59,13 +67,32 @@ def Employee_Login():
 
     Button(root, text="Login", command=E_Main, height=3, width=13).place(x=140, y=150)
 
+def Customer_Login():
+    # variable for name
+    global cname
+
+    # create login page
+    root = Tk()
+    root.geometry("400x300")
+    root.title("Customer Login Page")
+
+    Label(root, text="Username").place(x=10, y=50)
+
+    cname = Entry(root)
+    cname.place(x=140, y=50)
+
+    Button(root, text="Enter", command=C_Main, height=3, width=13).place(x=140, y=150)
+
+def C_Main():
+    #####
+    return
 
 def E_Main():
     name = e1.get()
     Employee_ID = e2.get()
 
-    sql = "select * from employees where name = %s"
-    cursor.execute(sql, [name])
+    sql = "select * from employees where name = %s and Employee_id = %s"
+    cursor.execute(sql, [name, Employee_ID])
     result = cursor.fetchall()
     if result:
 
@@ -142,7 +169,7 @@ def E_Main():
 
 welcome.geometry("400x300")
 welcome.title("Welcome to ChipChip")
-Button(welcome, text="Customer Login", height=3, width=13).place(x=75, y=50)
+cbutton = tk.Button(welcome, text="Customer Login", command=Customer_Login, height=3, width=13).place(x=75, y=50)
 button = tk.Button(welcome, text="Employee Login", command=Employee_Login, height=3, width=13).place(x=75, y=150)
 
 welcome.mainloop()
