@@ -1,3 +1,4 @@
+
 from load import *
 from setup import *
 from tkinter import *
@@ -6,6 +7,12 @@ import tkinter.ttk as ttk
 
 welcome = Tk()
 
+place_in_line = 4
+customer_id = 4
+order_id = 1
+
+order_name = ""
+items = "" #List of stuff that the user has selected
 
 def update():
     sql1 =  "select name from inventory where name = %s"
@@ -17,6 +24,7 @@ def update():
         cursor.execute("SELECT * FROM inventory")
         result = cursor.fetchall()
         print(result)
+
         
 
 
@@ -68,7 +76,7 @@ def Employee_Login():
     Button(root, text="Login", command=E_Main, height=3, width=13).place(x=140, y=150)
 
 def Customer_Login():
-    # variable for name
+    
     global cname
 
     # create login page
@@ -83,8 +91,91 @@ def Customer_Login():
 
     Button(root, text="Enter", command=C_Main, height=3, width=13).place(x=140, y=150)
 
+def getOrderType():
+    order_name = clicked.get()
+    print(order_name)
+def updateItemList():
+    items += clicked2.get()
+    items += ","
+    hold.config(state='normal')
+    hold.insert(0, items)
+    hold.config(state='disabled')
+
 def C_Main():
-    #####
+    global customer_id
+    global place_in_line
+
+    name = cname.get()
+    temp = "INSERT INTO Customer (Customer_ID, Name, Place_in_line, Order_ID) Values (%s, %s, %s, %s)"
+    cursor.execute(temp, [customer_id, name, place_in_line, None])
+    customer_id += 1
+    place_in_line += 1
+
+    #Check insert
+    cursor.execute("Select * from Customer")
+    for x in cursor:
+        print(x)
+
+    #CREATE create order page 
+
+    toplevel1 = tk.Tk()
+    toplevel1.configure(height=600, width=600)
+
+    #hold = Text of the stuff user has selected
+    global hold
+    hold = Entry(toplevel1)
+    hold.place(x=250, y=450)
+
+    #Text for item lsit
+    label5 = ttk.Label(toplevel1)
+    label5.configure(background="light green", text="Item List", anchor='c')
+    label5.place(height=30, width=400, x=75, y=400)
+
+    #Button for exit
+    ext = """
+    button3 = ttk.Button(toplevel1)
+    button3.configure(text='Exit')
+    button3.place(
+        height=75,
+        relwidth=0.0,
+        relx=0.0,
+        rely=0.0,
+        width=75,
+        x=500,
+        y=520)
+    """
+
+    #Dropdown for order type
+    global clicked
+    clicked = StringVar(toplevel1)
+    clicked.set("Bowl")
+    
+    drop = OptionMenu( toplevel1 , clicked , "Bowl", "Burrito", "Tacos")
+    drop.place(x= 250, y = 50)
+
+    button = Button(toplevel1, text="Confirm Choice", command=getOrderType)
+    button.place(x=225, y=100)
+
+    global clicked2
+    options = []
+    cursor.execute("select name from Protein")
+    for x in cursor:
+        options.append(x[0])
+    cursor.execute("select name from Ingredient")
+    for x in cursor:
+        options.append(x[0])
+
+    print(options)
+    
+
+
+    
+
+
+
+
+
+    
     return
 
 def E_Main():
