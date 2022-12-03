@@ -163,7 +163,7 @@ def E_Main():
 
 welcome.geometry("400x300")
 welcome.title("Welcome to ChipChip")
-Button(welcome, text="Customer Login", height=3, width=13).place(x=75, y=50)
+cbutton = tk.Button(welcome, text="Customer Login", command=Customer_Login, height=3, width=13).place(x=75, y=50)
 button = tk.Button(welcome, text="Employee Login", command=Employee_Login, height=3, width=13).place(x=75, y=150)
 
 welcome.mainloop()
