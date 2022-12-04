@@ -12,7 +12,8 @@ customer_id = 4
 order_id = 1
 
 order_name = ""
-items = "" #List of stuff that the user has selected
+items = [] #List of items chosen by user
+
 
 def update():
     sql1 =  "select name from inventory where name = %s"
@@ -92,13 +93,16 @@ def Customer_Login():
     Button(root, text="Enter", command=C_Main, height=3, width=13).place(x=140, y=150)
 
 def getOrderType():
+    global order_name
     order_name = clicked.get()
-    print(order_name)
+    
 def updateItemList():
-    items += clicked2.get()
-    items += ","
+    global items
+    temp_items = clicked2.get()
+    items.append(temp_items)
+    temp_items += ","
     hold.config(state='normal')
-    hold.insert(0, items)
+    hold.insert('end', temp_items)
     hold.config(state='disabled')
 
 def C_Main():
@@ -117,24 +121,23 @@ def C_Main():
         print(x)
 
     #CREATE create order page 
-
     toplevel1 = tk.Tk()
-    toplevel1.configure(height=600, width=600)
+    toplevel1.configure(height=450, width=600)
 
     #hold = Text of the stuff user has selected
     global hold
-    hold = Entry(toplevel1)
-    hold.place(x=250, y=450)
+    hold = Text(toplevel1, width = 100, height = 50)
+    hold.place(x=0, y=350)
+    hold.config(state='disabled')
 
     #Text for item lsit
     label5 = ttk.Label(toplevel1)
     label5.configure(background="light green", text="Item List", anchor='c')
-    label5.place(height=30, width=400, x=75, y=400)
+    label5.place(height=30, width=400, x=75, y=300)
 
-    #Button for exit
-    ext = """
+    #Button for confirming
     button3 = ttk.Button(toplevel1)
-    button3.configure(text='Exit')
+    button3.configure(text='Place Order' , command=displayOrder)
     button3.place(
         height=75,
         relwidth=0.0,
@@ -143,7 +146,6 @@ def C_Main():
         width=75,
         x=500,
         y=520)
-    """
 
     #Dropdown for order type
     global clicked
@@ -164,18 +166,17 @@ def C_Main():
     cursor.execute("select name from Ingredient")
     for x in cursor:
         options.append(x[0])
-
-    print(options)
     
+    clicked2 = StringVar(toplevel1)
+    clicked2.set(options[0])
 
+    drop = OptionMenu(toplevel1, clicked2, *options)
+    drop.place(x=250, y=150)
 
-    
+    button = Button(toplevel1, text="Confirm Ingredient", command=updateItemList)
+    button.place(x=225, y=200)
 
-
-
-
-
-    
+def displayOrder():
     return
 
 def E_Main():
