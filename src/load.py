@@ -102,5 +102,60 @@ if 'Chipotle_Lite' not in check:
         for x in cursor:
             print(x)
         print("\n")
+    
+
+    #Stored Procedures
+    cursor.execute("""
+    CREATE PROCEDURE createOrder(IN customerID INT, IN orderID INT, IN name varchar(10))
+    BEGIN
+    DECLARE i integer;
+    DECLARE j VARCHAR(255);
+    DECLARE test cursor for (
+        SELECT Employee_ID, Job FROM Employees WHERE Job = 'Server_on_the_line'
+    );
+
+    open test;
+    loop_label: LOOP
+        FETCH test into i, j;
+
+        select 'CHECK';
+
+        INSERT INTO User_Order(Order_ID, Customer_ID, Employee_ID, Name) VALUES(orderID, customerID, i, name);
+        leave loop_label;
+    END LOOP;
+    END;
+    """)
+
+    cursor.execute("""
+    CREATE PROCEDURE aggregateTotals(IN orderID INT, OUT fat1 INT, OUT calories1 INT)
+    BEGIN
+    DECLARE done int default FALSE;
+
+    DECLARE i integer;
+    DECLARE j integer;
+    DECLARE test cursor for (
+        select fat, calories from Ingredient_list natural join Ingredient WHERE Order_ID = orderID
+        UNION ALL
+        select fat, calories from Protein_list natural join Protein WHERE Order_ID = orderID
+    );
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+   
+
+    open test;
+    SET fat1 = 0;
+    SET calories1 = 0;
+    loop_label: LOOP
+        FETCH test into i, j;
+        
+        IF done THEN LEAVE loop_label;
+        END IF;
+
+        SET fat1 = fat1 + i;
+        SET calories1 = calories1 + j;
+       
+    END LOOP;
+    END;
+    """)
 
 

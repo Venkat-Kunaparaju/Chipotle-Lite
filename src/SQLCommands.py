@@ -57,7 +57,7 @@ createOrder = """
     )
     """
 insertOrder = """
-    INSERT INTO Order(Order_ID, Customer_ID, Employee_ID, Name) VALUES(%s, %s, %s, %s)
+    INSERT INTO User_Order(Order_ID, Customer_ID, Employee_ID, Name) VALUES(%s, %s, %s, %s)
 
     """
 createProteinList = """
