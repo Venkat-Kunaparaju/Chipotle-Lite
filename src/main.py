@@ -145,7 +145,7 @@ def C_Main():
         rely=0.0,
         width=75,
         x=500,
-        y=520)
+        y=400)
 
     #Dropdown for order type
     global clicked
@@ -177,7 +177,27 @@ def C_Main():
     button.place(x=225, y=200)
 
 def displayOrder():
-    return
+
+    #Create a stored procedure for creating a order from the customer, employee, and the two ingredient list and protein list tables created
+    #Returns the created order id
+
+    #Create ingredient_list
+    all_ingredients = []
+    all_proteins = []
+    cursor.execute("Select Name from Ingredient")
+    for x in cursor:
+        all_ingredients.append(x[0])
+    
+    cursor.execute("Select Name from Protein")
+    for x in cursor:
+        all_proteins.append(x[0])
+
+    for x in items:
+        if x in all_proteins:
+            cursor.execute("INSERT INTO Protein_LIST(Order_ID, Name) Values (%s, %s)", [order_id, x])
+        if x in all_ingredients:
+            cursor.execute("INSERT INTO Ingredient_LIST(Order_ID, Name) Values (%s, %s)", [order_id, x])
+
 
 def E_Main():
     name = e1.get()
