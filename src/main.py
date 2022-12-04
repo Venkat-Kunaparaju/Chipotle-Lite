@@ -24,7 +24,6 @@ def update():
         cursor.execute(temp, [x2.get(), x1.get()])
         cursor.execute("SELECT * FROM inventory")
         result = cursor.fetchall()
-        print(result)
 
         
 
@@ -114,11 +113,6 @@ def C_Main():
     cursor.execute(temp, [customer_id, name, place_in_line, None])
     customer_id += 1
     place_in_line += 1
-
-    #Check insert
-    cursor.execute("Select * from Customer")
-    for x in cursor:
-        print(x)
 
     #CREATE create order page 
     toplevel1 = tk.Tk()
@@ -272,7 +266,6 @@ def displayOrder():
     order = "Server: "
     cursor.execute("SELECT e.Name, u.name, u.Order_id FROM User_Order u Join Employees e ON e.Employee_Id = u.Employee_ID WHERE u.Order_id = %s", [order_id])
     for x in cursor:
-        print(x[2])
         order += x[0]
         temp = x[1]
         break
