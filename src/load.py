@@ -127,6 +127,42 @@ if 'Chipotle_Lite' not in check:
     """)
 
     cursor.execute("""
+    CREATE PROCEDURE updateItem(IN given_name varchar(10), IN volume INT)
+    BEGIN
+    DECLARE i integer;
+    DECLARE j VARCHAR(255);
+    DECLARE test cursor for (
+        SELECT Name FROM Inventory WHERE Name = given_name
+    );
+
+    IF test IS NOT NULL
+        UPDATE Inventory
+        SET count = volume
+        WHERE Name = given_name
+        
+    ELSE
+        test cursor for (
+            SELECT Name FROM Protein WHERE Name = given_name
+        );
+        
+    IF test IS NOT NULL    
+        UPDATE Protein
+        SET count = volume
+        WHERE Name = name
+        
+    ELSE
+    test cursor for (
+        SELECT Name FROM Ingredient WHERE Name = given_name
+    );
+    
+    IF test IS NOT NULL    
+        UPDATE Ingredient
+        SET count = volume
+        WHERE Name = name
+    END;
+    """)
+    
+    cursor.execute("""
     CREATE PROCEDURE aggregateTotals(IN orderID INT, OUT fat1 INT, OUT calories1 INT)
     BEGIN
     DECLARE done int default FALSE;
