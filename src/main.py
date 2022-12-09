@@ -16,14 +16,17 @@ items = [] #List of items chosen by user
 
 
 def update():
-    sql1 =  "select name from inventory where name = %s"
-    cursor.execute(sql1, [x1.get()])
-    result = cursor.fetchall()
-    if result:
-        temp = "UPDATE inventory SET Count = %s WHERE name = %s"
-        cursor.execute(temp, [x2.get(), x1.get()])
-        cursor.execute("SELECT * FROM inventory")
-        result = cursor.fetchall()
+    args = [x1.get(), x2.get()]
+    result_args = cursor.callproc("updateItem", args)
+
+    #sql1 =  "select name from inventory where name = %s"
+    #cursor.execute(sql1, [x1.get()])
+    #result = cursor.fetchall()
+    #if result:
+    #    temp = "UPDATE inventory SET Count = %s WHERE name = %s"
+    #    cursor.execute(temp, [x2.get(), x1.get()])
+    #    cursor.execute("SELECT * FROM inventory")
+    #    result = cursor.fetchall()
 
         
 
