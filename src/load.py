@@ -139,7 +139,7 @@ if 'Chipotle_Lite' not in check:
         UPDATE Inventory
         SET count = volume
         WHERE Name = given_name
-        
+
     ELSE
         test cursor for (
             SELECT Name FROM Protein WHERE Name = given_name
