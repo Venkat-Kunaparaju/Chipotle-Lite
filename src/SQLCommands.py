@@ -9,8 +9,8 @@ insertInventory = """
     """
 
 insertInventoryIndex = """ 
-CREATE INDEX insertInventoryIndex
-ON Inventory (Name) 
+CREATE INDEX InventoryIndex
+ON INVENTORY (Name, Count)
 """
 
 createEmployees = """
@@ -23,6 +23,10 @@ createEmployees = """
 insertEmployee = """
     INSERT INTO Employees(Employee_ID, Name, Salary, Job) VALUES(%s, %s, %s, %s)
     """
+insertEmployeeIndex = """ 
+CREATE INDEX EmployeeIndex
+ON Employees (Name) 
+"""
 createCustomer = """
     CREATE TABLE Customer (
         Customer_ID INT, Name VARCHAR(255),
@@ -34,6 +38,10 @@ createCustomer = """
 insertCustomer = """
     INSERT INTO Customer(Customer_ID, Name, Place_in_line, Order_ID) VALUES(%s, %s, %s, %s)
     """
+insertCustomerIndex = """ 
+CREATE INDEX CustomerIndex
+ON Customer (Name) 
+"""
 createProtein = """
     CREATE TABLE Protein (
         Name VARCHAR(255), Volume INT, Calories INT,
@@ -44,6 +52,10 @@ createProtein = """
 insertProtein = """
     INSERT INTO Protein(Name, Volume, Calories, Fat, Price, Extra_price) VALUES(%s, %s, %s, %s, %s, %s)
     """
+insertProteinIndex = """ 
+CREATE INDEX ProteinIndex
+ON Protein (Name, Price) 
+"""
 createIngredient = """
     CREATE TABLE Ingredient (
         Name VARCHAR(255), Volume INT, Calories INT,
@@ -54,6 +66,10 @@ createIngredient = """
 insertIngredient = """
     INSERT INTO Ingredient(Name, Volume, Calories, Fat, Price, Extra_price) VALUES(%s, %s, %s, %s, %s, %s)
     """
+insertIngredientIndex = """ 
+CREATE INDEX IngredientIndex
+ON Ingredient (Name, Price) 
+"""
 createOrder = """
     CREATE TABLE User_order (
         Order_ID INT, Customer_ID INT, Employee_ID INT,
