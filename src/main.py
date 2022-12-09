@@ -39,7 +39,7 @@ def C_Inven():
     inven = Tk()
     inven.geometry("400x300")
 
-    Label(inven, text="Name of Inventory").place(x=10, y=50)
+    Label(inven, text="Name of Item").place(x=10, y=50)
 
     global x1
     x1 = Entry(inven)
@@ -343,7 +343,7 @@ def E_Main():
         separator2.configure(orient="horizontal")
         separator2.place(height=5, width=1000, x=0, y=200)
         button2 = ttk.Button(toplevel1)
-        button2.configure(text="Change Inventory", command= C_Inven)
+        button2.configure(text="Change Item", command= C_Inven)
         button2.place(
             height=75,
             relwidth=0.0,
@@ -355,7 +355,7 @@ def E_Main():
 
         trv = ttk.Treeview(toplevel1, selectmode='browse')
         label5 = ttk.Label(toplevel1)
-        label5.configure(background="light green", text="Inventroy List", anchor='c')
+        label5.configure(background="light green", text="Inventory List", anchor='c')
         label5.place(height=100, width=400, x=75, y=250)
         trv.place(x=75, y=350)
         # number of columns
