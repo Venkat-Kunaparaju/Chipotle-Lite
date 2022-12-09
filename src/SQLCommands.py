@@ -7,6 +7,12 @@ createInventory = """
 insertInventory = """
     INSERT INTO INVENTORY(Name, Count) VALUES(%s, %s)
     """
+
+insertInventoryIndex = """ 
+CREATE INDEX insertInventoryIndex
+ON Inventory (Name) 
+"""
+
 createEmployees = """
     CREATE TABLE Employees (
         Employee_ID INT, Name VARCHAR(255), Salary INT,
