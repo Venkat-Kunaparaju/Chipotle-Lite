@@ -112,8 +112,8 @@ def C_Main():
     global place_in_line
 
     name = cname.get()
-    cursor.execute("START TRANSACTION;");
     cursor.execute("SET GLOBAL TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;")
+    cursor.execute("START TRANSACTION;");
     temp = "INSERT INTO Customer (Customer_ID, Name, Place_in_line, Order_ID) Values (%s, %s, %s, %s)"
     cursor.execute("COMMIT;")
     cursor.execute(temp, [customer_id, name, place_in_line, None])
