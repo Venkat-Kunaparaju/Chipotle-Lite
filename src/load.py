@@ -103,7 +103,12 @@ if 'Chipotle_Lite' not in check:
             print(x)
         print("\n")
     
-
+    cursor.execute(commands.insertEmployeeIndex);
+    cursor.execute(commands.insertCustomerIndex);
+    cursor.execute(commands.insertProteinIndex);
+    cursor.execute(commands.insertProteinIndex2);
+    cursor.execute(commands.insertIngredientIndex);
+    cursor.execute(commands.insertIngredientIndex2);
     #Stored Procedures
     cursor.execute("""
     CREATE PROCEDURE createOrder(IN customerID INT, IN orderID INT, IN name varchar(10))
@@ -127,14 +132,12 @@ if 'Chipotle_Lite' not in check:
     """)
 
     cursor.execute("""
-    DELIMITER //
-    CREATE PROCEDURE UpdateItem (IN given_name varchar(10), volume INT)
+    CREATE PROCEDURE UpdateItem (IN given_name varchar(10), vol INT)
     BEGIN
-    UPDATE Inventory SET Count = volume WHERE Name = given_name;
-    UPDATE Ingredients SET Count = volume WHERE Name = given_name;
-    UPDATE Protein SET Count = volume WHERE Name = given_name;
-
-    END //
+    UPDATE Inventory SET Count = vol WHERE Name = given_name;
+    UPDATE Ingredient SET Volume = vol WHERE Name = given_name;
+    UPDATE Protein SET Volume = vol WHERE Name = given_name;
+    END;
     """)
     
     cursor.execute("""

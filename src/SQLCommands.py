@@ -56,6 +56,10 @@ insertProteinIndex = """
 CREATE INDEX ProteinIndex
 ON Protein (Name, Price) 
 """
+insertProteinIndex2 = """ 
+CREATE INDEX ProteinIndex2
+ON Protein (Name, Volume)
+"""
 createIngredient = """
     CREATE TABLE Ingredient (
         Name VARCHAR(255), Volume INT, Calories INT,
@@ -69,6 +73,10 @@ insertIngredient = """
 insertIngredientIndex = """ 
 CREATE INDEX IngredientIndex
 ON Ingredient (Name, Price) 
+"""
+insertIngredientIndex2 = """ 
+CREATE INDEX IngredientIndex2
+ON Ingredient (Name, Volume) 
 """
 createOrder = """
     CREATE TABLE User_order (
