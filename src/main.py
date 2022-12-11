@@ -470,7 +470,7 @@ def E_Main():
             y=850)
 
         button6 = ttk.Button(toplevel1)
-        button6.configure(text="Change Inventory", command=C_Inven)
+        button6.configure(text="Change Ingredient", command=C_Ingri())
         button6.place(
             height=75,
             relwidth=0.0,
