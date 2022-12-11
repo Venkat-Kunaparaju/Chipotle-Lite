@@ -28,7 +28,15 @@ def update():
     #    cursor.execute("SELECT * FROM inventory")
     #    result = cursor.fetchall()
 
-        
+def update1():
+    sql1 =  "select name from ingredient where name = %s"
+    cursor.execute(sql1, [x1.get()])
+    result = cursor.fetchall()
+    if result:
+        temp = "UPDATE ingredient SET Volume = %s WHERE name = %s"
+        cursor.execute(temp, [x2.get(), x1.get()])
+        cursor.execute("SELECT * FROM ingredient")
+        result = cursor.fetchall()
 
 
 def createOrder():
@@ -36,6 +44,69 @@ def createOrder():
     #z2 is the type of order (bowl, tacos, etc.)
     return
 
+def All_P():
+    toplevel1 = tk.Tk()
+    toplevel1.configure(height=800, width=600)
+    trv = ttk.Treeview(toplevel1, selectmode='browse')
+    label5 = ttk.Label(toplevel1)
+    label5.configure(background="light green", text="All Employees", anchor='c')
+    label5.place(height=100, width=200, x=75, y=250)
+    trv.place(x=75, y=350)
+    # number of columns
+    trv["columns"] = ("1")
+
+    # Defining heading
+    trv['show'] = 'headings'
+
+    # width of columns and alignment
+    trv.column("1", width=199, anchor='c')
+
+    # Headings
+    # respective columns
+    trv.heading("1", text="Employee")
+
+
+    # getting data from MySQL student table
+    cursor.execute("SELECT DISTINCT employees.Name FROM employees""")
+    rows = cursor.fetchall()
+
+
+    for row in rows:
+        print(row)
+
+        trv.insert("", tk.END, values=row)
+
+def All_C():
+    toplevel1 = tk.Tk()
+    toplevel1.configure(height=800, width=600)
+    trv = ttk.Treeview(toplevel1, selectmode='browse')
+    label5 = ttk.Label(toplevel1)
+    label5.configure(background="light green", text="All Employees", anchor='c')
+    label5.place(height=100, width=200, x=75, y=250)
+    trv.place(x=75, y=350)
+    # number of columns
+    trv["columns"] = ("1")
+
+    # Defining heading
+    trv['show'] = 'headings'
+
+    # width of columns and alignment
+    trv.column("1", width=199, anchor='c')
+
+    # Headings
+    # respective columns
+    trv.heading("1", text="Customer")
+
+
+    # getting data from MySQL student table
+    cursor.execute("SELECT DISTINCT Name FROM customer""")
+    rows = cursor.fetchall()
+
+
+    for row in rows:
+        print(row)
+
+        trv.insert("", tk.END, values=row)
 
 
 def C_Inven():
@@ -55,7 +126,24 @@ def C_Inven():
 
     Button(inven, text="Confirm", height=3, width=13, command=update).place(x=140, y=150)
 
+def C_Ingri():
+    inven = Tk()
+    inven.geometry("400x300")
 
+    Label(inven, text="Name of Ingredient").place(x=10, y=50)
+
+    global x1
+    x1 = Entry(inven)
+    x1.place(x=140, y=50)
+
+    global x2
+    Label(inven, text="No. of Units").place(x=10, y=100)
+    x2 = Entry(inven)
+    x2.place(x=140, y=100)
+
+    Button(inven, text="Confirm", height=3, width=13, command=update).place(x=140, y=150)
+
+        
 def Employee_Login():
     # variables for name and employee_id
     global e1
@@ -340,7 +428,7 @@ def E_Main():
             relx=0.0,
             rely=0.0,
             width=150,
-            x=700,
+            x=750,
             y=850)
         separator1 = ttk.Separator(toplevel1)
         separator1.configure(orient="horizontal")
@@ -357,6 +445,39 @@ def E_Main():
             rely=0.0,
             width=150,
             x=75,
+            y=850)
+        
+        button3 = ttk.Button(toplevel1)
+        button3.configure(text="All Employees", command= All_P)
+        button3.place(
+            height=75,
+            relwidth=0.0,
+            relx=0.0,
+            rely=0.0,
+            width=100,
+            x=275,
+            y=850)
+
+        button4 = ttk.Button(toplevel1)
+        button4.configure(text="All Customers", command=All_C)
+        button4.place(
+            height=75,
+            relwidth=0.0,
+            relx=0.0,
+            rely=0.0,
+            width=100,
+            x=425,
+            y=850)
+
+        button6 = ttk.Button(toplevel1)
+        button6.configure(text="Change Inventory", command=C_Inven)
+        button6.place(
+            height=75,
+            relwidth=0.0,
+            relx=0.0,
+            rely=0.0,
+            width=150,
+            x=575,
             y=850)
 
         trv = ttk.Treeview(toplevel1, selectmode='browse')
@@ -384,6 +505,33 @@ def E_Main():
         row = cursor.fetchall()
         for y in row:
             trv.insert('', 'end', values=y)
+        
+        trv1 = ttk.Treeview(toplevel1, selectmode='browse')
+        label6 = ttk.Label(toplevel1)
+        label6.configure(background="light green", text="Ingredient List", anchor='c')
+        label6.place(height=100, width=400, x=500, y=250)
+        trv1.place(x=500, y=350)
+        # number of columns
+        trv1["columns"] = ("1", "2")
+
+        # Defining heading
+        trv1['show'] = 'headings'
+
+        # width of columns and alignment
+        trv1.column("1", width=199, anchor='c')
+        trv1.column("2", width=199, anchor='c')
+
+        # Headings
+        # respective columns
+        trv1.heading("1", text="Name")
+        trv1.heading("2", text="Count")
+
+        # getting data from MySQL student table
+        cursor.execute("SELECT Name, Volume FROM ingredient")
+        row = cursor.fetchall()
+        for y in row:
+            trv1.insert('', 'end', values=y)
+
 
 
     else:
