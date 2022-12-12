@@ -135,7 +135,7 @@ if 'Chipotle_Lite' not in check:
     CREATE PROCEDURE UpdateItem (IN given_name varchar(10), vol INT)
     BEGIN
     
-    SET GLOBAL TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; 
+    SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED; 
     START TRANSACTION;  
     UPDATE Inventory SET Count = vol WHERE Name = given_name;
     UPDATE Ingredient SET Volume = vol WHERE Name = given_name;
