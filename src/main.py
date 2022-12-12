@@ -460,16 +460,6 @@ def E_Main():
             x=525,
             y=850)
 
-        button6 = ttk.Button(toplevel1)
-        button6.configure(text="Change Ingredient", command=C_Ingri)
-        button6.place(
-            height=75,
-            relwidth=0.0,
-            relx=0.0,
-            rely=0.0,
-            width=150,
-            x=775,
-            y=850)
 
         trv = ttk.Treeview(toplevel1, selectmode='browse')
         label5 = ttk.Label(toplevel1)
@@ -499,7 +489,7 @@ def E_Main():
 
         trv1 = ttk.Treeview(toplevel1, selectmode='browse')
         label6 = ttk.Label(toplevel1)
-        label6.configure(background="light green", text="Ingredient List", anchor='c')
+        label6.configure(background="light green", text="Food List", anchor='c')
         label6.place(height=100, width=400, x=500, y=250)
         trv1.place(x=500, y=350)
         # number of columns
@@ -522,6 +512,13 @@ def E_Main():
         row = cursor.fetchall()
         for y in row:
             trv1.insert('', 'end', values=y)
+        
+        cursor.execute("SELECT Name, Volume FROM protein")
+        row = cursor.fetchall()
+        for y in row:
+            trv1.insert('', 'end', values=y)
+
+
 
 
 
